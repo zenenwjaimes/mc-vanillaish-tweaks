@@ -10,3 +10,5 @@ As it stands now, the mod adds the following:
 4. On the release of the Trident w/ Loyalty, the mod saves the slot spot and tries to reuse the same spot when it returns to your player.
 
 I am very new to Fabric and Mixins so I may be doing a lot of things wrong, this is more of a mod for personal use (in MC and in learning modding). 
+
+My main goal is to not break the vanilla experience or make something overpowered.
