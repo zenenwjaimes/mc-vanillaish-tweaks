@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "vanillaishtweaks",
+  "version": "${version}",
+  "name": "Vanillaishtweaks",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/vanillaishtweaks/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "zenenwjaimes.vanillaishtweaks.client.VanillaishtweaksClient"
+    ],
+    "main": [
+      "zenenwjaimes.vanillaishtweaks.Vanillaishtweaks"
+    ]
+  },
+  "mixins": [
+    "vanillaishtweaks.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.10.0+build.208",
+    "fabric": "*",
+    "minecraft": "1.16.5"
+  }
+}
