@@ -6,13 +6,15 @@
   "mixins": [
     "EnhancedTrident.MixinPersistentProjectileEntity",
     "EnhancedTrident.MixinTridentEntity",
+
     "MixinSkyProperties",
     "EnhancedBlockBreaking.Blocks",
     "EnhancedBlockBreaking.ShearsItem"
   ],
   "client": [
-    "EnhancedTrident.EnhancedClientPlayNetworkHandler",
+    "EnhancedTrident.EnhancedPersistentProjectileEntity",
     "EnhancedTrident.EnhancedTridentEntity",
+
     "EnhancedSkyProperties",
     "EnhancedShulker",
     "EnhancedShulkerGui",
