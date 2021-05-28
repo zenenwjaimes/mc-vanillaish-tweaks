@@ -1,4 +1,4 @@
-package zenenwjaimes.vanillaishtweaks.mixin.EnhancedCompass;
+package zenenwjaimes.vanillaishtweaks.mixin.EnhancedHud;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
@@ -13,13 +13,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtHelper;
-import net.minecraft.text.Text;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -29,12 +26,16 @@ import java.util.Optional;
 @Environment(EnvType.CLIENT)
 @Mixin(InGameHud.class)
 public class EnhancedInGameHud {
+    private static final String COORD_FORMAT = "%d, %d, %d";
+    private static final String TIME_FORMAT = "Time Of Day: %s";
+
     @Inject(method = "render", require = -1, at = @At(value = "TAIL"))
     public void renderItem(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
         MixinInGameHud hud = (MixinInGameHud) (Object) this;
         ClientPlayerEntity player = hud.getClient().player;
         ItemStack offhand = player.getOffHandStack();
         ItemStack mainhand = player.getMainHandStack();
+        boolean showingCoords = false;
 
         if ((!mainhand.isEmpty() && mainhand.getItem() == Items.COMPASS && CompassItem.hasLodestone(mainhand)) || (!offhand.isEmpty() && offhand.getItem() == Items.COMPASS && CompassItem.hasLodestone(offhand))) {
             ItemStack stack = CompassItem.hasLodestone(mainhand) ? mainhand : offhand;
@@ -49,24 +50,30 @@ public class EnhancedInGameHud {
                 BlockPos pos = NbtHelper.toBlockPos(compoundTag.getCompound("LodestonePos"));
 
                 if (pos.getX() == 0 && pos.getZ() == 0) {
-                    this.renderPlayerPosition(matrices, hud.getClient().player.getBlockPos().getX(), hud.getClient().player.getBlockPos().getY(), hud.getClient().player.getBlockPos().getZ());
+                    showingCoords = true;
+                    this.renderHudText(matrices, String.format(COORD_FORMAT, hud.getClient().player.getBlockPos().getX(), hud.getClient().player.getBlockPos().getY(), hud.getClient().player.getBlockPos().getZ()), 0);
                 }
             }
         }
+
+        if ((!mainhand.isEmpty() && mainhand.getItem() == Items.CLOCK) || (!offhand.isEmpty() && offhand.getItem() == Items.CLOCK)) {
+            long timeOfDay = player.getEntityWorld().getTimeOfDay();
+
+            this.renderHudText(matrices, String.format(TIME_FORMAT, timeOfDay), showingCoords ? 10 : 0);
+        }
     }
 
-    private void renderPlayerPosition(MatrixStack matrices, int x, int y, int z) {
+    private void renderHudText(MatrixStack matrices, String overlayMessage, int offset) {
         InGameHud oldHud = (InGameHud) (Object) this;
         MixinInGameHud hud = (MixinInGameHud) (Object) this;
         ClientPlayerEntity player = hud.getClient().player;
         TextRenderer textRenderer = oldHud.getFontRenderer();
-        String overlayMessage = String.format("%d %d %d", x, y, z);
         int strWidth = textRenderer.getWidth(overlayMessage);
 
         hud.getClient().getProfiler().push("overlayCoords");
         int l = 255;
         RenderSystem.pushMatrix();
-        RenderSystem.translatef(10.0f + (strWidth/2), 10.0f, 0.0f);
+        RenderSystem.translatef(10.0f + (strWidth/2), 10.0f + offset, 0.0f);
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         int m = 0xFFFFFF;

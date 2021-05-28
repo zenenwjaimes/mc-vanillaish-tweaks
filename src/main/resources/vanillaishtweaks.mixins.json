@@ -6,7 +6,7 @@
   "mixins": [
     "EnhancedTrident.MixinPersistentProjectileEntity",
     "EnhancedTrident.MixinTridentEntity",
-    "EnhancedCompass.MixinInGameHud",
+    "EnhancedHud.MixinInGameHud",
 
     "MixinSkyProperties",
     "EnhancedBlockBreaking.Blocks",
@@ -15,7 +15,7 @@
   "client": [
     "EnhancedTrident.EnhancedPersistentProjectileEntity",
     "EnhancedTrident.EnhancedTridentEntity",
-    "EnhancedCompass.EnhancedInGameHud",
+    "EnhancedHud.EnhancedInGameHud",
     "EnhancedSkyProperties",
     "EnhancedShulker",
     "EnhancedShulkerGui",

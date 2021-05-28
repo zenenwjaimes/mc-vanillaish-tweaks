@@ -1,4 +1,4 @@
-package zenenwjaimes.vanillaishtweaks.mixin.EnhancedCompass;
+package zenenwjaimes.vanillaishtweaks.mixin.EnhancedHud;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameHud;
