@@ -5,7 +5,7 @@ import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.BlockView;
@@ -32,11 +32,11 @@ public class EnhancedShulker {
         int popCount = 0;
 
         // Only remove items on non-empty containers
-        CompoundTag compoundTag = stack.getSubTag("BlockEntityTag");
+        NbtCompound compoundTag = stack.getSubTag("BlockEntityTag");
         if (compoundTag != null) {
             if (compoundTag.contains("Items", 9)) {
                 DefaultedList<ItemStack> defaultedList = DefaultedList.ofSize(27, ItemStack.EMPTY);
-                Inventories.fromTag(compoundTag, defaultedList);
+                Inventories.readNbt(compoundTag, defaultedList);
                 int i = 0;
                 int j = 0;
                 Iterator it = defaultedList.iterator();

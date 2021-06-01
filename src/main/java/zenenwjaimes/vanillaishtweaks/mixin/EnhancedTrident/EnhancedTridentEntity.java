@@ -31,19 +31,19 @@ public class EnhancedTridentEntity {
                 int slot = EnchantmentHelper.getLoyalty(tridentStack) > 0 ? StateManager.getInstance().getThrownFromSlot() : -1;
 
                 // Avoid deleting item stacks
-                if (slot != -1 && !player.inventory.main.get(slot).isEmpty()) {
+                if (slot != -1 && !player.getInventory().main.get(slot).isEmpty()) {
                     slot = -1;
                 }
 
                 if (!te.world.isClient && (isInGround || te.isNoClip()) && te.shake <= 0) {
-                    boolean bl = te.pickupType == PersistentProjectileEntity.PickupPermission.ALLOWED || te.pickupType == PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY && player.abilities.creativeMode || te.isNoClip() && te.getOwner().getUuid() == player.getUuid();
-                    if (te.pickupType == PersistentProjectileEntity.PickupPermission.ALLOWED && !player.inventory.insertStack(slot, tridentStack.copy())) {
+                    boolean bl = te.pickupType == PersistentProjectileEntity.PickupPermission.ALLOWED || te.pickupType == PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY && player.getAbilities().creativeMode || te.isNoClip() && te.getOwner().getUuid() == player.getUuid();
+                    if (te.pickupType == PersistentProjectileEntity.PickupPermission.ALLOWED && !player.getInventory().insertStack(slot, tridentStack.copy())) {
                         bl = false;
                     }
 
                     if (bl) {
                         player.sendPickup(te, 1);
-                        te.remove();
+                        te.remove(Entity.RemovalReason.DISCARDED);
                     }
                 }
             }

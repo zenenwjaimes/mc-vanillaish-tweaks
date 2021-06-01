@@ -16,7 +16,7 @@ public class EnhancedTridentItem {
     public void spawnEntity(TridentEntity tridentEntity, Entity user, float pitch, float yaw, float roll, float modifierZ, float modifierXYZ) {
         try {
             if (tridentEntity instanceof TridentEntity && EnchantmentHelper.getLoyalty(((MixinTridentEntity) tridentEntity).getTridentStack()) > 0) {
-                StateManager.getInstance().setThrownFromSlot(((PlayerEntity) (Object) user).inventory.selectedSlot);
+                StateManager.getInstance().setThrownFromSlot(((PlayerEntity) (Object) user).getInventory().selectedSlot);
             }
         } catch (ClassCastException cce) {
             System.out.println(this.getClass().toString() + cce);

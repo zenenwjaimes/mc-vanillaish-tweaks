@@ -13,7 +13,7 @@ import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.inventory.Inventories;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.OrderedText;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
@@ -70,11 +70,11 @@ public class EnhancedShulkerGui extends DrawableHelper {
             return;
         }
 
-        CompoundTag compoundTag = stack.getSubTag("BlockEntityTag");
-        if (compoundTag != null) {
-            if (compoundTag.contains("Items", 9)) {
+        NbtCompound nbtCompound = stack.getSubTag("BlockEntityTag");
+        if (nbtCompound != null) {
+            if (nbtCompound.contains("Items", 9)) {
                 DefaultedList<ItemStack> defaultedList = DefaultedList.ofSize(27, ItemStack.EMPTY);
-                Inventories.fromTag(compoundTag, defaultedList);
+                Inventories.readNbt(nbtCompound, defaultedList);
                 Iterator it = defaultedList.iterator();
 
                 // Calculate if tooltip will render offscreen
@@ -111,8 +111,8 @@ public class EnhancedShulkerGui extends DrawableHelper {
 
     @SuppressWarnings("deprecation")
     protected void drawShulkerBackground(MatrixStack matrices, float delta, int mouseX, int mouseY) {
-        RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-        client.getTextureManager().bindTexture(SHULKER_PREVIEW);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
+        RenderSystem.setShaderTexture(0, SHULKER_PREVIEW);
         int prevZOffset = getZOffset();
         setZOffset(700);
         drawTexture(matrices, mouseX+6, mouseY-86, 0.5f, 0.5f, 176, 68, 256, 256);

@@ -15,7 +15,7 @@ public class EnhancedPersistentProjectileEntity {
     public void setOwner(Entity entity, CallbackInfo ci) {
         try {
             if (entity instanceof ClientPlayerEntity) {
-                StateManager.getInstance().setThrownFromSlot(((ClientPlayerEntity) (Object) entity).inventory.selectedSlot);
+                StateManager.getInstance().setThrownFromSlot(((ClientPlayerEntity) (Object) entity).getInventory().selectedSlot);
             }
         } catch (ClassCastException cce) {
             System.out.println(this.getClass().toString() + cce);

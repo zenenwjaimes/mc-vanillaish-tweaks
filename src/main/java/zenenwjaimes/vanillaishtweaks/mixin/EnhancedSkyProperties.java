@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(WorldRenderer.class)
 public class EnhancedSkyProperties {
     @Redirect(
-            method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;FDDD)V",
+            method = "renderClouds(Lnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/util/math/Matrix4f;FDDD)V",
             at = @At(
                     value = "INVOKE",
                     target = "Lnet/minecraft/client/render/SkyProperties;getCloudsHeight()F"

@@ -15,8 +15,8 @@ import java.util.function.Consumer;
 
 @Mixin(net.minecraft.item.ShearsItem.class)
 public class ShearsItem {
-    @Inject(at = @At("RETURN"), method = "isEffectiveOn", cancellable = true)
-    public void isEffectiveOn(BlockState state, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(at = @At("RETURN"), method = "isSuitableFor", cancellable = true)
+    public void isSuitableFor(BlockState state, CallbackInfoReturnable<Boolean> cir) {
         if (state.getMaterial() == Material.GLASS) {
             cir.setReturnValue(true);
         }

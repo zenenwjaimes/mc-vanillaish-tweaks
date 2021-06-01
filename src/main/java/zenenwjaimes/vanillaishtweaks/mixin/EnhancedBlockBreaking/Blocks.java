@@ -15,7 +15,7 @@ public class Blocks {
     private static void register(String id, Block block, CallbackInfoReturnable<Block> cir) {
         switch (id) {
             case "bone_block":
-                Block boneBlock = new PillarBlock(AbstractBlock.Settings.of(Material.STONE, MaterialColor.SAND).requiresTool().strength(1.5F, 2.0F).sounds(BlockSoundGroup.BONE));
+                Block boneBlock = new PillarBlock(AbstractBlock.Settings.of(Material.STONE, Material.STONE.getColor()).requiresTool().strength(1.5F, 2.0F).sounds(BlockSoundGroup.BONE));
                 cir.setReturnValue((Block) Registry.register(Registry.BLOCK, (String)id, boneBlock));
                 break;
             case "glass":

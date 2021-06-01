@@ -7,11 +7,12 @@ import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.hud.BackgroundHelper;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.CompassItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.RegistryKey;
@@ -22,6 +23,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Optional;
+
+import static net.minecraft.client.gui.DrawableHelper.GUI_ICONS_TEXTURE;
 
 @Environment(EnvType.CLIENT)
 @Mixin(InGameHud.class)
@@ -39,7 +42,7 @@ public class EnhancedInGameHud {
 
         if ((!mainhand.isEmpty() && mainhand.getItem() == Items.COMPASS && CompassItem.hasLodestone(mainhand)) || (!offhand.isEmpty() && offhand.getItem() == Items.COMPASS && CompassItem.hasLodestone(offhand))) {
             ItemStack stack = CompassItem.hasLodestone(mainhand) ? mainhand : offhand;
-            CompoundTag compoundTag = stack.getOrCreateTag();
+            NbtCompound compoundTag = stack.getOrCreateTag();
 
             if (compoundTag.contains("LodestoneTracked") && !compoundTag.getBoolean("LodestoneTracked")) {
                 return;
@@ -72,16 +75,16 @@ public class EnhancedInGameHud {
 
         hud.getClient().getProfiler().push("overlayCoords");
         int l = 255;
-        RenderSystem.pushMatrix();
-        RenderSystem.translatef(10.0f + (strWidth/2), 10.0f + offset, 0.0f);
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
+        matrices.push();
+        matrices.translate(10.0f + (strWidth/2), 10.0f + offset, 0.0f);
         int m = 0xFFFFFF;
         int n = l << 24 & 0xFF000000;
         this.drawTextBackground(matrices, textRenderer, -4, strWidth, 0xFFFFFF | n);
         textRenderer.draw(matrices, overlayMessage, (float) (-strWidth / 2), -4.0f, m | n);
         RenderSystem.disableBlend();
-        RenderSystem.popMatrix();
+        matrices.pop();
         hud.getClient().getProfiler().pop();
     }
 
