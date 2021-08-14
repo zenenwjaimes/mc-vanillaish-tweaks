@@ -42,7 +42,7 @@ public class EnhancedInGameHud {
 
         if ((!mainhand.isEmpty() && mainhand.getItem() == Items.COMPASS && CompassItem.hasLodestone(mainhand)) || (!offhand.isEmpty() && offhand.getItem() == Items.COMPASS && CompassItem.hasLodestone(offhand))) {
             ItemStack stack = CompassItem.hasLodestone(mainhand) ? mainhand : offhand;
-            NbtCompound compoundTag = stack.getOrCreateTag();
+            NbtCompound compoundTag = stack.getOrCreateNbt();
 
             if (compoundTag.contains("LodestoneTracked") && !compoundTag.getBoolean("LodestoneTracked")) {
                 return;
@@ -70,7 +70,7 @@ public class EnhancedInGameHud {
         InGameHud oldHud = (InGameHud) (Object) this;
         MixinInGameHud hud = (MixinInGameHud) (Object) this;
         ClientPlayerEntity player = hud.getClient().player;
-        TextRenderer textRenderer = oldHud.getFontRenderer();
+        TextRenderer textRenderer = oldHud.getTextRenderer();
         int strWidth = textRenderer.getWidth(overlayMessage);
 
         hud.getClient().getProfiler().push("overlayCoords");

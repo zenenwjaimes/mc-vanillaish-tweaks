@@ -26,8 +26,8 @@ public class EnhancedSuspiciousStewItem {
     @Inject(at = @At("HEAD"), method = "appendTooltip")
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context, CallbackInfo info) {
         Item rawItem = stack.getItem();
-        if (rawItem == Items.SUSPICIOUS_STEW && stack.getTag() != null && stack.getTag().contains("Effects")) {
-            NbtList listTag = (NbtList) stack.getTag().get("Effects");
+        if (rawItem == Items.SUSPICIOUS_STEW && stack.getNbt() != null && stack.getNbt().contains("Effects")) {
+            NbtList listTag = (NbtList) stack.getNbt().get("Effects");
 
             listTag.forEach((item) -> {
                 StatusEffect statusEffect = StatusEffect.byRawId(((NbtCompound)item).getByte("EffectId"));

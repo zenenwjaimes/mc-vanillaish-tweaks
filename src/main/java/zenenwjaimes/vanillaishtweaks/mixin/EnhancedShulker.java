@@ -32,7 +32,7 @@ public class EnhancedShulker {
         int popCount = 0;
 
         // Only remove items on non-empty containers
-        NbtCompound compoundTag = stack.getSubTag("BlockEntityTag");
+        NbtCompound compoundTag = stack.getSubNbt("BlockEntityTag");
         if (compoundTag != null) {
             if (compoundTag.contains("Items", 9)) {
                 DefaultedList<ItemStack> defaultedList = DefaultedList.ofSize(27, ItemStack.EMPTY);
