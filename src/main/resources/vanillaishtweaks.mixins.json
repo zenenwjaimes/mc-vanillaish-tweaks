@@ -7,16 +7,14 @@
     "EnhancedTrident.MixinPersistentProjectileEntity",
     "EnhancedTrident.MixinTridentEntity",
     "EnhancedHud.MixinInGameHud",
-
-    "MixinSkyProperties",
     "EnhancedBlockBreaking.Blocks",
-    "EnhancedBlockBreaking.ShearsItem"
+    "EnhancedBlockBreaking.ShearsItem",
+    "EnhancedBeaconBlock.EnhancedBeaconBlockEntity"
   ],
   "client": [
     "EnhancedTrident.EnhancedPersistentProjectileEntity",
     "EnhancedTrident.EnhancedTridentEntity",
     "EnhancedHud.EnhancedInGameHud",
-    "EnhancedSkyProperties",
     "EnhancedShulker",
     "EnhancedShulkerGui",
     "EnhancedSuspiciousStewItem"
