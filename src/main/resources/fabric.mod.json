@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "vanillaishtweaks",
-  "version": "1.11-SNAPSHOT",
+  "version": "1.13-SNAPSHOT",
   "name": "Vanillaishtweaks",
   "description": "",
   "authors": [],
@@ -21,8 +21,8 @@
     "vanillaishtweaks.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.12.8",
+    "fabricloader": ">=0.12.11",
     "fabric": "*",
-    "minecraft": "1.18"
+    "minecraft": "1.18.1"
   }
 }
