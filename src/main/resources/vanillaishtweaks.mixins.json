@@ -7,8 +7,6 @@
     "EnhancedTrident.MixinPersistentProjectileEntity",
     "EnhancedTrident.MixinTridentEntity",
     "EnhancedHud.MixinInGameHud",
-    "EnhancedBlockBreaking.Blocks",
-    "EnhancedBlockBreaking.ShearsItem",
     "EnhancedBeaconBlock.EnhancedBeaconBlockEntity"
   ],
   "client": [
