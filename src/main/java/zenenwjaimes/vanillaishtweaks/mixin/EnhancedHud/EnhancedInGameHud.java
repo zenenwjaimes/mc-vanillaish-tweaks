@@ -48,7 +48,7 @@ public class EnhancedInGameHud {
                 return;
             }
             Optional<RegistryKey<World>> optional = World.CODEC.parse(NbtOps.INSTANCE, compoundTag.get("LodestoneDimension")).result();
-            
+
             if (optional.isPresent() && compoundTag.contains("LodestonePos")) {
                 BlockPos pos = NbtHelper.toBlockPos(compoundTag.getCompound("LodestonePos"));
 

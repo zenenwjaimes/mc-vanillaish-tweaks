@@ -3,6 +3,7 @@ package zenenwjaimes.vanillaishtweaks.mixin.EnhancedBlockBreaking;
 
 import net.minecraft.block.*;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,6 +14,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class Blocks {
     @Inject(at = @At("HEAD"), method = "register", cancellable = true)
     private static void register(String id, Block block, CallbackInfoReturnable<Block> cir) {
+        if (Registry.BLOCK == null) {
+            cir.cancel();
+            return;
+        }
+        System.out.println(block);
+        System.out.println(id);
+        /**
         switch (id) {
             case "bone_block":
                 Block boneBlock = new PillarBlock(AbstractBlock.Settings.of(Material.STONE, Material.STONE.getColor()).requiresTool().strength(1.5F, 2.0F).sounds(BlockSoundGroup.BONE));
@@ -40,5 +48,6 @@ public class Blocks {
                 cir.setReturnValue((Block) Registry.register(Registry.BLOCK, (String)id, new Block(AbstractBlock.Settings.copy(net.minecraft.block.Blocks.QUARTZ_BLOCK))));
                 break;
         }
+         **/
     }
 }
