@@ -11,10 +11,7 @@ public class Vanillaishtweaks implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        System.out.println("pickling!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-        System.out.println(Registry.BLOCK.getKeys());
-        Block boneBlock = Registry.BLOCK.get(Identifier.tryParse("minecraft:bone_block"));
-        System.out.println(boneBlock);
+        // Block boneBlock = Registry.BLOCK.get(Identifier.tryParse("minecraft:bone_block"));
     }
 
     public String getModId() {
