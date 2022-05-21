@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "vanillaishtweaks",
-  "version": "1.15-SNAPSHOT",
+  "version": "1.16-SNAPSHOT",
   "name": "Vanillaishtweaks",
   "description": "",
   "authors": [],
@@ -21,8 +21,8 @@
     "vanillaishtweaks.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.5",
+    "fabricloader": ">=0.14.6",
     "fabric": "*",
-    "minecraft": "1.19-alpha.22.19.a"
+    "minecraft": "1.19-beta.1"
   }
 }
