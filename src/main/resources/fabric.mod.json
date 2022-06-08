@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "vanillaishtweaks",
-  "version": "1.16-SNAPSHOT",
+  "version": "1.19-SNAPSHOT",
   "name": "Vanillaishtweaks",
   "description": "",
   "authors": [],
@@ -23,6 +23,6 @@
   "depends": {
     "fabricloader": ">=0.14.6",
     "fabric": "*",
-    "minecraft": "1.19-beta.1"
+    "minecraft": "1.19-beta.2"
   }
 }
