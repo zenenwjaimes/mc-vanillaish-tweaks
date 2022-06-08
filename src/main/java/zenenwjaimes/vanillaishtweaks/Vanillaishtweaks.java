@@ -1,7 +1,9 @@
 package zenenwjaimes.vanillaishtweaks;
 
 import net.fabricmc.api.ModInitializer;
-import org.spongepowered.asm.mixin.Mixin;
+import net.minecraft.block.Block;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 public class Vanillaishtweaks implements ModInitializer {
     public static String MOD_ID = "vanillaishtweaks";
@@ -9,7 +11,7 @@ public class Vanillaishtweaks implements ModInitializer {
 
     @Override
     public void onInitialize() {
-
+        // Block boneBlock = Registry.BLOCK.get(Identifier.tryParse("minecraft:bone_block"));
     }
 
     public String getModId() {

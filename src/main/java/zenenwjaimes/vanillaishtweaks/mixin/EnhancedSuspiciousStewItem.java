@@ -32,7 +32,7 @@ public class EnhancedSuspiciousStewItem {
             listTag.forEach((item) -> {
                 StatusEffect statusEffect = StatusEffect.byRawId(((NbtCompound)item).getByte("EffectId"));
                 if (statusEffect != null) {
-                    MutableText effectsInfo = statusEffect.getName().shallowCopy();
+                    MutableText effectsInfo = statusEffect.getName().copyContentOnly();
                     tooltip.add(effectsInfo.formatted(Formatting.ITALIC).formatted(Formatting.AQUA));
                 }
             });

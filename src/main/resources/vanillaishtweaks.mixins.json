@@ -2,14 +2,14 @@
   "required": true,
   "minVersion": "0.8",
   "package": "zenenwjaimes.vanillaishtweaks.mixin",
-  "compatibilityLevel": "JAVA_8",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
     "EnhancedTrident.MixinPersistentProjectileEntity",
     "EnhancedTrident.MixinTridentEntity",
     "EnhancedHud.MixinInGameHud",
+    "EnhancedBeaconBlock.EnhancedBeaconBlockEntity",
     "EnhancedBlockBreaking.Blocks",
-    "EnhancedBlockBreaking.ShearsItem",
-    "EnhancedBeaconBlock.EnhancedBeaconBlockEntity"
+    "EnhancedBlockBreaking.ShearsItem"
   ],
   "client": [
     "EnhancedTrident.EnhancedPersistentProjectileEntity",
