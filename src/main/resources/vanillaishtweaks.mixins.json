@@ -8,8 +8,8 @@
     "EnhancedTrident.MixinTridentEntity",
     "EnhancedHud.MixinInGameHud",
     "EnhancedBeaconBlock.EnhancedBeaconBlockEntity",
-    "EnhancedBlockBreaking.Blocks",
-    "EnhancedBlockBreaking.ShearsItem"
+    "EnhancedBlockBreaking.ShearsItem",
+    "EnhancedBlocks.MixinBlockPlacementDispenserBehavior"
   ],
   "client": [
     "EnhancedTrident.EnhancedPersistentProjectileEntity",
@@ -17,7 +17,8 @@
     "EnhancedHud.EnhancedInGameHud",
     "EnhancedShulker",
     "EnhancedShulkerGui",
-    "EnhancedSuspiciousStewItem"
+    "EnhancedSuspiciousStewItem",
+    "EnhancedBlocks.EnhancedBlockPlacementDispenserBehavior"
   ],
   "server": [
   ],

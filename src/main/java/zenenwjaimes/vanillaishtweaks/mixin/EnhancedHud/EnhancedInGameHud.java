@@ -13,9 +13,9 @@ import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtOps;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ColorHelper;
-import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -47,6 +47,7 @@ public class EnhancedInGameHud {
             if (compoundTag.contains("LodestoneTracked") && !compoundTag.getBoolean("LodestoneTracked")) {
                 return;
             }
+
             Optional<RegistryKey<World>> optional = World.CODEC.parse(NbtOps.INSTANCE, compoundTag.get("LodestoneDimension")).result();
 
             if (optional.isPresent() && compoundTag.contains("LodestonePos")) {

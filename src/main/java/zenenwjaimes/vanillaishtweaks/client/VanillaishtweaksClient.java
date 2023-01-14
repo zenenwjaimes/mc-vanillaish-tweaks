@@ -3,8 +3,6 @@ package zenenwjaimes.vanillaishtweaks.client;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import zenenwjaimes.vanillaishtweaks.Vanillaishtweaks;
 
 @Environment(EnvType.CLIENT)
