@@ -26,7 +26,6 @@ public class EnhancedBlockPlacementDispenserBehavior {
 
     @Inject(at = @At("HEAD"), method = "dispenseSilently", cancellable = true)
     protected void dispenseSilently(BlockPointer pointer, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
-        MixinBlockPlacementDispenserBehavior bpdb = (MixinBlockPlacementDispenserBehavior) (Object)this;
         ((MixinBlockPlacementDispenserBehavior) this).setSuccess(false);
         Item item = stack.getItem();
         if (item instanceof BlockItem) {
