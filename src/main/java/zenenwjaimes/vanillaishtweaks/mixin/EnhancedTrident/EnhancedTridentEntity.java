@@ -35,7 +35,7 @@ public class EnhancedTridentEntity {
                     slot = -1;
                 }
 
-                if (!te.world.isClient && (isInGround || te.isNoClip()) && te.shake <= 0) {
+                if (!te.getWorld().isClient && (isInGround || te.isNoClip()) && te.shake <= 0) {
                     boolean bl = te.pickupType == PersistentProjectileEntity.PickupPermission.ALLOWED || te.pickupType == PersistentProjectileEntity.PickupPermission.CREATIVE_ONLY && player.getAbilities().creativeMode || te.isNoClip() && te.getOwner().getUuid() == player.getUuid();
                     if (te.pickupType == PersistentProjectileEntity.PickupPermission.ALLOWED && !player.getInventory().insertStack(slot, tridentStack.copy())) {
                         bl = false;
