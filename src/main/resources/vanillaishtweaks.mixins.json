@@ -9,14 +9,13 @@
     "EnhancedHud.MixinInGameHud",
     "EnhancedBeaconBlock.EnhancedBeaconBlockEntity",
     "EnhancedBlockBreaking.ShearsItem",
-    "EnhancedBlocks.MixinBlockPlacementDispenserBehavior"
+    "EnhancedBlocks.MixinBlockPlacementDispenserBehavior",
+    "EnhancedLibrarian"
   ],
   "client": [
     "EnhancedTrident.EnhancedPersistentProjectileEntity",
     "EnhancedTrident.EnhancedTridentEntity",
     "EnhancedHud.EnhancedInGameHud",
-    "EnhancedShulker",
-    "EnhancedShulkerGui",
     "EnhancedSuspiciousStewItem",
     "EnhancedBlocks.EnhancedBlockPlacementDispenserBehavior"
   ],

@@ -1,6 +1,5 @@
 package zenenwjaimes.vanillaishtweaks.mixin;
 
-import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.Item;

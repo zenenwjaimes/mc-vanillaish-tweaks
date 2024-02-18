@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.util.math.MatrixStack;
@@ -15,7 +16,6 @@ import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.ColorHelper;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,8 +24,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Optional;
 
-import static net.minecraft.client.gui.DrawableHelper.GUI_ICONS_TEXTURE;
-
 @Environment(EnvType.CLIENT)
 @Mixin(InGameHud.class)
 public class EnhancedInGameHud {
@@ -33,7 +31,7 @@ public class EnhancedInGameHud {
     private static final String TIME_FORMAT = "Time Of Day: %s";
 
     @Inject(method = "render", require = -1, at = @At(value = "TAIL"))
-    public void renderItem(MatrixStack matrices, float tickDelta, CallbackInfo ci) {
+    public void renderItem(DrawContext context, float tickDelta, CallbackInfo ci) {
         MixinInGameHud hud = (MixinInGameHud) (Object) this;
         ClientPlayerEntity player = hud.getClient().player;
         ItemStack offhand = player.getOffHandStack();
@@ -55,7 +53,7 @@ public class EnhancedInGameHud {
 
                 if (pos.getX() == 0 && pos.getZ() == 0) {
                     showingCoords = true;
-                    this.renderHudText(matrices, String.format(COORD_FORMAT, hud.getClient().player.getBlockPos().getX(), hud.getClient().player.getBlockPos().getY(), hud.getClient().player.getBlockPos().getZ()), 0);
+                    this.renderHudText(context, context.getMatrices(), String.format(COORD_FORMAT, hud.getClient().player.getBlockPos().getX(), hud.getClient().player.getBlockPos().getY(), hud.getClient().player.getBlockPos().getZ()), 0);
                 }
             }
         }
@@ -63,11 +61,11 @@ public class EnhancedInGameHud {
         if ((!mainhand.isEmpty() && mainhand.getItem() == Items.CLOCK) || (!offhand.isEmpty() && offhand.getItem() == Items.CLOCK)) {
             long timeOfDay = player.getEntityWorld().getTimeOfDay();
 
-            this.renderHudText(matrices, String.format(TIME_FORMAT, timeOfDay), showingCoords ? 10 : 0);
+            this.renderHudText(context, context.getMatrices(), String.format(TIME_FORMAT, timeOfDay), showingCoords ? 10 : 0);
         }
     }
 
-    private void renderHudText(MatrixStack matrices, String overlayMessage, int offset) {
+    private void renderHudText(DrawContext context, MatrixStack matrices, String overlayMessage, int offset) {
         InGameHud oldHud = (InGameHud) (Object) this;
         MixinInGameHud hud = (MixinInGameHud) (Object) this;
         ClientPlayerEntity player = hud.getClient().player;
@@ -82,14 +80,15 @@ public class EnhancedInGameHud {
         matrices.translate(10.0f + (strWidth/2), 10.0f + offset, 0.0f);
         int m = 0xFFFFFF;
         int n = l << 24 & 0xFF000000;
-        this.drawTextBackground(matrices, textRenderer, -4, strWidth, 0xFFFFFF | n);
-        textRenderer.draw(matrices, overlayMessage, (float) (-strWidth / 2), -4.0f, m | n);
+        //this.drawTextBackground(matrices, textRenderer, -4, strWidth, 0xFFFFFF | n);
+        context.drawText(textRenderer, overlayMessage, (-strWidth / 2), -4, m | n, false);
+//        textRenderer.draw(overlayMessage, (float) (-strWidth / 2), -4.0f, m | n, false,  context.getVertexConsumers(), TextRenderer.TextLayerType.SEE_THROUGH, 0xFFFFFF | n, 1);
         RenderSystem.disableBlend();
         matrices.pop();
         hud.getClient().getProfiler().pop();
     }
 
-    private void drawTextBackground(MatrixStack matrices, TextRenderer textRenderer, int yOffset, int width, int color) {
+    /*private void drawTextBackground(MatrixStack matrices, TextRenderer textRenderer, int yOffset, int width, int color) {
         MixinInGameHud hud = (MixinInGameHud) (Object) this;
 
         int i = hud.getClient().options.getTextBackgroundColor(0.0f);
@@ -97,5 +96,5 @@ public class EnhancedInGameHud {
             int j = -width / 2;
             InGameHud.fill(matrices, j - 2, yOffset - 2, j + width + 2, yOffset + 9 + 2, ColorHelper.Argb.mixColor(i, color));
         }
-    }
+    }*/
 }
